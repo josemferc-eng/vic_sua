@@ -52,6 +52,25 @@ label {
   color: var(--text-h);
 }
 
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.post-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.post-item h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
 [role='alert'] {
   color: #b42318;
 }

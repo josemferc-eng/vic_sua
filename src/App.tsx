@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { PostsSection } from './components/PostsSection.tsx'
 import { UsersSection } from './components/UsersSection.tsx'
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
           {selectedUserId == null ? (
             <p>Selecciona un usuario para ver sus publicaciones.</p>
           ) : (
-            <p>Usuario seleccionado: {selectedUserId}</p>
+            <PostsSection userId={selectedUserId} />
           )}
         </section>
       </div>
