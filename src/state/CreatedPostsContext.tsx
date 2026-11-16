@@ -17,12 +17,13 @@ export function CreatedPostsProvider({ children }: { children: ReactNode }) {
     () => ({
       getCreatedPosts: (userId) => createdPostsByUser[userId] ?? [],
       addCreatedPost: (userId, post) => {
-        const normalized: Post = { ...post, userId }
         setCreatedPostsByUser((prev) => {
           const current = prev[userId] ?? []
-          if (current.some((p) => p.id === normalized.id)) {
-            return prev
+          let id = post.id ?? Date.now()
+          if (current.some((p) => p.id === id)) {
+            id = Date.now() + Math.floor(Math.random() * 1000)
           }
+          const normalized: Post = { ...post, id, userId }
           return { ...prev, [userId]: [normalized, ...current] }
         })
       },

@@ -9,7 +9,12 @@ export function useCreatePost(userId: number) {
   return useMutation({
     mutationFn: (newPost: NewPost) => createPost(newPost),
     onSuccess: (created) => {
-      const post: Post = { ...created, id: created.id ?? Date.now(), userId }
+      // JSONPlaceholder returns a fixed id; use a unique client id for session state.
+      const post: Post = {
+        ...created,
+        id: Date.now() + Math.floor(Math.random() * 1000),
+        userId,
+      }
       addCreatedPost(userId, post)
     },
   })
