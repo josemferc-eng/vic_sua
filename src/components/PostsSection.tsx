@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { usePosts } from '../hooks/usePosts.ts'
 import type { Post } from '../types/index.ts'
 import { PostForm } from './PostForm.tsx'
@@ -8,10 +9,25 @@ type Props = {
 
 export function PostsSection({ userId }: Props) {
   const { data: posts, isLoading, isError, error, refetch } = usePosts(userId)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <div>
-      <PostForm userId={userId} />
+      <button type="button" onClick={() => setIsModalOpen(true)}>
+        Crear publicación
+      </button>
+
+      {isModalOpen && (
+        <div className="modal-backdrop" role="presentation">
+          <div className="modal" role="dialog" aria-modal="true" aria-label="Nueva publicación">
+            <PostForm
+              userId={userId}
+              onSuccess={() => setIsModalOpen(false)}
+              onCancel={() => setIsModalOpen(false)}
+            />
+          </div>
+        </div>
+      )}
 
       {isLoading && <p role="status">Cargando publicaciones…</p>}
 

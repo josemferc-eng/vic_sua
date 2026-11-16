@@ -3,9 +3,11 @@ import { useCreatePost } from '../hooks/useCreatePost.ts'
 
 type Props = {
   userId: number
+  onSuccess?: () => void
+  onCancel?: () => void
 }
 
-export function PostForm({ userId }: Props) {
+export function PostForm({ userId, onSuccess, onCancel }: Props) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [errors, setErrors] = useState<{ title?: string; body?: string }>({})
@@ -25,6 +27,7 @@ export function PostForm({ userId }: Props) {
       setBody('')
       setErrors({})
       reset()
+      onSuccess?.()
     } catch {
       // error shown via mutation state
     }
@@ -63,9 +66,16 @@ export function PostForm({ userId }: Props) {
         </p>
       )}
 
-      <button type="submit" disabled={isPending}>
-        {isPending ? 'Publicando…' : 'Crear publicación'}
-      </button>
+      <div className="form-actions">
+        {onCancel && (
+          <button type="button" onClick={onCancel} disabled={isPending}>
+            Cancelar
+          </button>
+        )}
+        <button type="submit" disabled={isPending}>
+          {isPending ? 'Publicando…' : 'Crear publicación'}
+        </button>
+      </div>
     </form>
   )
 }
