@@ -71,6 +71,24 @@ label {
   font-size: 18px;
 }
 
+form h3 {
+  margin: 0 0 12px;
+}
+
+button[type='submit'] {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--accent-bg);
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 [role='alert'] {
   color: #b42318;
 }
