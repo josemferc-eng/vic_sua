@@ -37,6 +37,14 @@ function mockFetch() {
         ],
       } as Response
     }
+    if (url.includes('/posts?userId=2')) {
+      return {
+        ok: true,
+        json: async () => [
+          { userId: 2, id: 20, title: 'Post de Ervin', body: 'Contenido Ervin' },
+        ],
+      } as Response
+    }
     if (url.endsWith('/posts') && init?.method === 'POST') {
       const body = JSON.parse(String(init.body)) as {
         userId: number
@@ -123,5 +131,29 @@ describe('App', () => {
     )
     expect(await screen.findByText('Segundo post')).toBeInTheDocument()
     expect(screen.getByText('Primer post')).toBeInTheDocument()
+  })
+
+  it('mantiene posts creados al cambiar de usuario sin mezclarlos', async () => {
+    const user = userEvent.setup()
+    renderApp()
+
+    await user.click(await screen.findByRole('button', { name: 'Leanne Graham' }))
+    await screen.findByText('Post inicial')
+
+    await user.click(screen.getByRole('button', { name: 'Crear publicación' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Nueva publicación' })
+    await user.type(within(dialog).getByLabelText('Título *'), 'Post extra')
+    await user.type(within(dialog).getByLabelText('Texto *'), 'Contenido extra')
+    await user.click(within(dialog).getByRole('button', { name: 'Crear' }))
+
+    expect(await screen.findByText('Post extra')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Ervin Howell' }))
+    await screen.findByText('Post de Ervin')
+    expect(screen.queryByText('Post extra')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Leanne Graham' }))
+    await screen.findByText('Post inicial')
+    expect(screen.getByText('Post extra')).toBeInTheDocument()
   })
 })
