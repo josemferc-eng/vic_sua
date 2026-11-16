@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useUsers } from '../hooks/useUsers.ts'
 import type { User } from '../types/index.ts'
+import { Button } from './Button.tsx'
 
 type Props = {
   selectedUserId: number | null
@@ -36,9 +37,9 @@ export function UsersSection({ selectedUserId, onSelectUser }: Props) {
       {isError && (
         <div role="alert">
           <p>Error al cargar usuarios: {error instanceof Error ? error.message : 'desconocido'}</p>
-          <button type="button" onClick={() => refetch()}>
+          <Button type="button" variant="outline" onClick={() => refetch()}>
             Reintentar
-          </button>
+          </Button>
         </div>
       )}
 

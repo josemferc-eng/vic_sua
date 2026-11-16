@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useCreatePost } from '../hooks/useCreatePost.ts'
+import { Button } from './Button.tsx'
 
 type Props = {
   userId: number
@@ -68,13 +69,13 @@ export function PostForm({ userId, onSuccess, onCancel }: Props) {
 
       <div className="form-actions">
         {onCancel && (
-          <button type="button" onClick={onCancel} disabled={isPending}>
+          <Button type="button" variant="outline" onClick={onCancel} disabled={isPending}>
             Cancelar
-          </button>
+          </Button>
         )}
-        <button type="submit" disabled={isPending}>
-          {isPending ? 'Publicando…' : 'Crear publicación'}
-        </button>
+        <Button type="submit" variant="solid" disabled={isPending}>
+          {isPending ? 'Publicando…' : 'Crear'}
+        </Button>
       </div>
     </form>
   )

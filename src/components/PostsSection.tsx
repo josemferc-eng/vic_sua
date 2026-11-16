@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { usePosts } from '../hooks/usePosts.ts'
 import type { Post } from '../types/index.ts'
+import { Button } from './Button.tsx'
 import { PostForm } from './PostForm.tsx'
 
 type Props = {
@@ -12,10 +13,13 @@ export function PostsSection({ userId }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <div>
-      <button type="button" onClick={() => setIsModalOpen(true)}>
-        Crear publicación
-      </button>
+    <section aria-labelledby="posts-heading">
+      <div className="section-header">
+        <h2 id="posts-heading">Publicaciones</h2>
+        <Button type="button" variant="solid" onClick={() => setIsModalOpen(true)}>
+          Crear publicación
+        </Button>
+      </div>
 
       {isModalOpen && (
         <div className="modal-backdrop" role="presentation">
@@ -37,9 +41,9 @@ export function PostsSection({ userId }: Props) {
             Error al cargar publicaciones:{' '}
             {error instanceof Error ? error.message : 'desconocido'}
           </p>
-          <button type="button" onClick={() => refetch()}>
+          <Button type="button" variant="outline" onClick={() => refetch()}>
             Reintentar
-          </button>
+          </Button>
         </div>
       )}
 
@@ -57,6 +61,6 @@ export function PostsSection({ userId }: Props) {
           ))}
         </ul>
       )}
-    </div>
+    </section>
   )
 }

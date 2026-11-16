@@ -14,14 +14,16 @@ function App() {
           selectedUserId={selectedUserId}
           onSelectUser={setSelectedUserId}
         />
-        <section aria-labelledby="posts-heading">
-          <h2 id="posts-heading">Publicaciones</h2>
-          {selectedUserId == null ? (
+        {selectedUserId == null ? (
+          <section aria-labelledby="posts-heading">
+            <div className="section-header">
+              <h2 id="posts-heading">Publicaciones</h2>
+            </div>
             <p>Selecciona un usuario para ver sus publicaciones.</p>
-          ) : (
-            <PostsSection userId={selectedUserId} />
-          )}
-        </section>
+          </section>
+        ) : (
+          <PostsSection userId={selectedUserId} />
+        )}
       </div>
     </main>
   )

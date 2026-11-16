@@ -23,7 +23,7 @@
   text-align: left;
   padding: 8px 10px;
   border: 1px solid var(--border);
-  background: var(--bg);
+  background: transparent;
   color: var(--text-h);
   border-radius: 6px;
   cursor: pointer;
@@ -75,17 +75,28 @@ form h3 {
   margin: 0 0 12px;
 }
 
-button[type='submit'],
-button[type='button'] {
+.btn {
   padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--accent-bg);
-  color: var(--text-h);
+  border: 1px solid transparent;
   cursor: pointer;
+  font: inherit;
 }
 
-button[disabled] {
+.btn-solid {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-h);
+  border-color: var(--border);
+}
+
+button[disabled],
+.btn[disabled] {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -94,6 +105,19 @@ button[disabled] {
   display: flex;
   gap: 8px;
   margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  margin: 0;
 }
 
 .modal-backdrop {
