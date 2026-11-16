@@ -8,7 +8,7 @@ function App() {
 
   return (
     <main className="app">
-      <h1>Prueba técnica: Usuarios y publicaciones</h1>
+      <h1>vic_sua</h1>
       <div className="layout">
         <UsersSection
           selectedUserId={selectedUserId}
