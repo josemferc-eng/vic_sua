@@ -47,11 +47,11 @@ export function PostsSection({ userId }: Props) {
         </div>
       )}
 
-      {!isLoading && !isError && (!posts || posts.length === 0) && (
+      {!isLoading && (!posts || posts.length === 0) && !isError && (
         <p>Este usuario no tiene publicaciones.</p>
       )}
 
-      {!isLoading && !isError && posts && posts.length > 0 && (
+      {!isLoading && posts && posts.length > 0 && (
         <ul className="post-list">
           {posts.map((post: Post) => (
             <li key={post.id} className="post-item">
