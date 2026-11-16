@@ -76,11 +76,12 @@ form h3 {
 }
 
 .btn {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 6px;
   border: 1px solid transparent;
   cursor: pointer;
   font: inherit;
+  font-size: 14px;
 }
 
 .btn-solid {
